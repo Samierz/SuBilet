@@ -7,7 +7,7 @@
 
 [Siteyi canlı denemek için tıklayabilirsiniz](http://95.130.171.20/~st23360859058/index.php)
 
-[Youtube demo videosunu izlemek için tıklayabilirsiniz](http://95.130.171.20/~st23360859058/index.php)
+[Youtube demo videosunu izlemek için tıklayabilirsiniz](https://www.youtube.com/watch?v=Sj8bnFOPHZA)
 
 
 
