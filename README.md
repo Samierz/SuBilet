@@ -87,11 +87,11 @@ CREATE TABLE tickets (
 
 Kayıt Olma Ekranı
 
-![Oyun Ekranı](images/ss2.png)
+![Oyun Ekranı](images/ss1.png)
 
 Giriş Yapma Ekranı
 
-![Oyun Ekranı](images/ss1.png)
+![Oyun Ekranı](images/ss2.png)
 
 Yeni Etkinlik Oluşturma
 
