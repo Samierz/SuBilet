@@ -156,3 +156,110 @@ events tablosundaki available_tickets değeri 1 azaltılır.
 ---
 
 
+**SORU: phpden mysql de olusturduğum tabloya nasıl bağlanabilirim**
+
+# 🐘 PHP ile MySQL Veritabanına Bağlanma ve Veri Çekme Rehberi
+
+Bu rehberde PHP kullanarak MySQL veritabanına nasıl bağlanılır, tabloya sorgu nasıl atılır ve veriler nasıl alınır adım adım anlatılmaktadır.
+
+---
+
+## ✅ 1. Veritabanı Bağlantısını Kurmak
+
+Aşağıdaki kod parçası, PHP ile bir MySQL veritabanına nasıl bağlanacağınızı gösterir:
+
+```php
+<?php
+$host = "localhost";          // veya 127.0.0.1
+$username = "kullanici_adi"; // genellikle "root"
+$password = "sifre";          // MySQL şifreniz
+$database = "veritabani_adi"; // Hedef veritabanı adı
+
+// Bağlantıyı oluştur
+$conn = new mysqli($host, $username, $password, $database);
+
+// Bağlantı kontrolü
+if ($conn->connect_error) {
+    die("Bağlantı başarısız: " . $conn->connect_error);
+}
+echo "Bağlantı başarılı!";
+?>
+📌 Not: mysqli yerine PDO da kullanılabilir, ancak mysqli öğrenmesi daha kolay olduğu için yeni başlayanlar için idealdir.
+
+✅ 2. Tablodan Veri Okumak (SELECT)
+Aşağıdaki örnek tabloya SELECT sorgusu atıp verileri ekrana yazdırır:
+
+php
+Kopyala
+Düzenle
+$sql = "SELECT * FROM tablo_adi"; // Örnek: kullanicilar
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Tüm satırları yazdır
+    while($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["id"] . " - İsim: " . $row["isim"] . "<br>";
+    }
+} else {
+    echo "Tabloda veri yok.";
+}
+✅ 3. Bağlantıyı Kapatmak
+Bağlantıyı manuel olarak kapatmak önemlidir:
+
+php
+Kopyala
+Düzenle
+$conn->close();
+🔁 Tam Uygulama Örneği
+Aşağıda, veritabanına bağlanıp kullanicilar adlı tablodan veri çekilen tam bir örnek yer almaktadır:
+
+php
+Kopyala
+Düzenle
+<?php
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "ornek_db";
+
+// Bağlantıyı oluştur
+$conn = new mysqli($host, $username, $password, $database);
+
+// Bağlantıyı kontrol et
+if ($conn->connect_error) {
+    die("Bağlantı hatası: " . $conn->connect_error);
+}
+
+// Karakter setini ayarla
+$conn->set_charset("utf8mb4");
+
+// Sorguyu çalıştır
+$sql = "SELECT * FROM kullanicilar";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Sonuçları yazdır
+    while($row = $result->fetch_assoc()) {
+        echo "Kullanıcı Adı: " . $row["kullanici_adi"] . "<br>";
+    }
+} else {
+    echo "Kayıt bulunamadı.";
+}
+
+// Bağlantıyı kapat
+$conn->close();
+?>
+🛠️ İpuçları
+❌ Eğer bağlantı hatası alırsan, detaylı hata mesajını görmek için mysqli_connect_error() kullanılabilir.
+
+✅ phpMyAdmin'de tablo ve veritabanı adlarının doğru yazıldığından emin ol.
+
+🇹🇷 Türkçe karakter sorunu yaşarsan, karakter setini şu şekilde ayarla:
+
+php
+Kopyala
+Düzenle
+$conn->set_charset("utf8mb4");
+Bu yapılarla PHP ile veritabanı işlemlerine hızlıca giriş yapabilir, kullanıcıdan veri alıp veritabanına işleyebilir ve veri listeleyebilirsin.
+
+
